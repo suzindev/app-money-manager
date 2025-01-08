@@ -1,5 +1,6 @@
 package com.suzintech.domain;
 
+import com.suzintech.exception.DomainException;
 import com.suzintech.utils.InstantUtils;
 
 import java.time.Instant;
@@ -24,6 +25,8 @@ public class Activity {
         this.type = type;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
+
+        this.validate();
     }
 
     public static Activity newActivity(final Instant date, final String description,
@@ -42,6 +45,22 @@ public class Activity {
     public static Activity with(final String id, final Instant date, final String description,
                                 final float value, final Type.ActivityType type, final Instant createdAt, final Instant updatedAt) {
         return new Activity(id, date, description, value, type, createdAt, updatedAt);
+    }
+
+    private void validate() {
+        if (this.id.isBlank()) {
+            throw new DomainException("Activity's ID should not be blank");
+        } else if (this.id.length() != 36) {
+            throw new DomainException("Activity's ID should be a valid UUID");
+        } else if (this.description.isBlank()) {
+            throw new DomainException("Activity's description should not be blank");
+        } else if (this.type != Type.ActivityType.EXPENSE && this.type != Type.ActivityType.REVENUE) {
+            throw new DomainException("Activity's type shouldbe either expense or revenue");
+        } else if (this.value < 0) {
+            throw new DomainException("Activity's value should be greater than zero");
+        } else if (this.createdAt.isAfter(this.updatedAt)) {
+            throw new DomainException("Activity's created at should be before updated at");
+        }
     }
 
     public String getId() {
