@@ -11,12 +11,12 @@ public class Activity {
     private Instant date;
     private String description;
     private float value;
-    private Type type;
+    private Type.ActivityType type;
     private Instant createdAt;
     private Instant updatedAt;
 
     private Activity(final String id, final Instant date, final String description,
-                     final float value, final Type type, final Instant createdAt, final Instant updatedAt) {
+                     final float value, final Type.ActivityType type, final Instant createdAt, final Instant updatedAt) {
         this.id = id;
         this.date = date;
         this.description = description;
@@ -27,7 +27,7 @@ public class Activity {
     }
 
     public static Activity newActivity(final Instant date, final String description,
-                                       final float value, final Type type) {
+                                       final float value, final Type.ActivityType type) {
         return new Activity(
                 UUID.randomUUID().toString().toLowerCase(),
                 date,
@@ -40,7 +40,7 @@ public class Activity {
     }
 
     public static Activity with(final String id, final Instant date, final String description,
-                                final float value, final Type type, final Instant createdAt, final Instant updatedAt) {
+                                final float value, final Type.ActivityType type, final Instant createdAt, final Instant updatedAt) {
         return new Activity(id, date, description, value, type, createdAt, updatedAt);
     }
 
@@ -76,11 +76,11 @@ public class Activity {
         this.value = value;
     }
 
-    public Type getType() {
+    public Type.ActivityType getType() {
         return type;
     }
 
-    public void setType(Type type) {
+    public void setType(Type.ActivityType type) {
         this.type = type;
     }
 
