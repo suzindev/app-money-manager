@@ -16,10 +16,10 @@ import java.util.stream.Stream;
 public class ActivityEntity {
 
     @Id
-    @Column(name = "id", nullable = false)
+    @Column(name = "id", length = 36, nullable = false)
     private String id;
 
-    @Column(name = "description", nullable = false)
+    @Column(name = "description", length = 80, nullable = false)
     private String description;
 
     @Column(name = "date", nullable = false)
