@@ -1,7 +1,7 @@
 package com.suzintech.infra.mapper;
 
-import com.suzintech.infra.controller.dto.ActivityDTO;
-import com.suzintech.infra.controller.dto.ListActivitiesResponse;
+import com.suzintech.infra.dto.ActivityDTO;
+import com.suzintech.infra.dto.ListActivitiesResponse;
 import com.suzintech.infra.dto.ListActivitiesOutput;
 
 import java.util.List;

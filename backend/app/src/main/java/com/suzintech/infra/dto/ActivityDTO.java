@@ -1,4 +1,4 @@
-package com.suzintech.infra.controller.dto;
+package com.suzintech.infra.dto;
 
 import java.time.Instant;
 

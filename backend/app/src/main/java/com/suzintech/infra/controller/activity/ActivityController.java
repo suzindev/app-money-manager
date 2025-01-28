@@ -1,8 +1,9 @@
-package com.suzintech.infra.controller;
+package com.suzintech.infra.controller.activity;
 
-import com.suzintech.infra.controller.dto.ListActivitiesResponse;
 import com.suzintech.infra.dto.ActivityRequest;
 import com.suzintech.infra.dto.ActivityResponse;
+import com.suzintech.infra.dto.CalculateBalanceResponse;
+import com.suzintech.infra.dto.ListActivitiesResponse;
 import com.suzintech.infra.mapper.ActivityOutputToActivityResponseMapper;
 import com.suzintech.infra.mapper.ActivityRequestToActivityServiceMapper;
 import com.suzintech.infra.mapper.ListActivitiesToListActivitiesResponseMapper;
@@ -51,5 +52,15 @@ public class ActivityController {
         service.remove(id);
 
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/balance")
+    public ResponseEntity<CalculateBalanceResponse> calculateBalance() {
+        final var gateway = ActivityUseCase.build(repository);
+        final var service = ActivityServiceImpl.build(gateway);
+        final var output = service.calculateBalance();
+        final var response = new CalculateBalanceResponse(output);
+
+        return ResponseEntity.ok().body(response);
     }
 }
