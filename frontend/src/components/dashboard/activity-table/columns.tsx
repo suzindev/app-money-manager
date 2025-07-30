@@ -1,6 +1,7 @@
 "use client";
 
 import { ColumnDef } from "@tanstack/react-table";
+import { RemoveButton } from "./remove-button";
 
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
@@ -17,13 +18,8 @@ export const columns: ColumnDef<Activity>[] = [
     accessorKey: "date",
     header: "Data",
     cell: ({ row }) => {
-      const aDate = row.getValue("date") as Date;
-      const formatedDate =
-        aDate.getDate() +
-        "/" +
-        (aDate.getMonth() + 1) +
-        "/" +
-        aDate.getFullYear();
+      const aDate = new Date(row.getValue("date"));
+      const formatedDate = `${aDate.getDate()}/${aDate.getMonth()}/${aDate.getFullYear()}`;
 
       return <p>{formatedDate}</p>;
     },
@@ -61,7 +57,9 @@ export const columns: ColumnDef<Activity>[] = [
     id: "actions",
     header: "Ações",
     cell: ({ row }) => {
-      return <button variant="ghost">Remover</button>;
+      const id = row.original.id;
+
+      return <RemoveButton id={id} />;
     },
   },
 ];
