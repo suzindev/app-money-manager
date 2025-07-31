@@ -106,21 +106,23 @@ export function InsertActivityForm() {
             render={({ field }) => {
               return (
                 <FormItem className="w-max">
-                  <Popover>
-                    <PopoverTrigger asChild>
-                      <Button
-                        variant="outline"
-                        data-empty={!field.value}
-                        className="data-[empty=true]:text-muted-foreground w-max justify-start text-left font-normal"
-                      >
-                        <CalendarIcon />
-                        {field.value ? format(field.value, "PPP") : <span>Pick a date</span>}
-                      </Button>
-                    </PopoverTrigger>
-                    <PopoverContent className="w-auto p-0">
-                      <Calendar mode="single" selected={field.value} onSelect={field.onChange} />
-                    </PopoverContent>
-                  </Popover>
+                  <FormControl>
+                    <Popover>
+                      <PopoverTrigger asChild>
+                        <Button
+                          variant="outline"
+                          data-empty={!field.value}
+                          className="data-[empty=true]:text-muted-foreground w-max justify-start text-left font-normal"
+                        >
+                          <CalendarIcon />
+                          {field.value ? format(field.value, "PPP") : <span>Pick a date</span>}
+                        </Button>
+                      </PopoverTrigger>
+                      <PopoverContent className="w-auto p-0">
+                        <Calendar mode="single" selected={field.value} onSelect={field.onChange} />
+                      </PopoverContent>
+                    </Popover>
+                  </FormControl>
                 </FormItem>
               )
             }}
